@@ -97,3 +97,18 @@
                 throw new RuntimeException("Error: operador o función no encontrada -> " + operador);
         }
     }
+
+    private static Object reemplazarParametros(Object expresion, Map<String, Object> entorno) {
+        if (expresion instanceof String && entorno.containsKey(expresion)) {
+            return entorno.get(expresion);
+        }
+        if (expresion instanceof List) {
+            List<Object> lista = new ArrayList<>();
+            for (Object elemento : (List<Object>) expresion) {
+                lista.add(reemplazarParametros(elemento, entorno));
+            }
+            return lista;
+        }
+        return expresion;
+    }
+}
