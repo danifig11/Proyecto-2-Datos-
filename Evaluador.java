@@ -85,3 +85,15 @@
                     if (parametros.size() != operandos.size()) {
                         throw new RuntimeException("Error: número incorrecto de parámetros en " + operador);
                     }
+                    
+                    Map<String, Object> entornoLocal = new HashMap<>(variables);
+                    for (int i = 0; i < parametros.size(); i++) {
+                        entornoLocal.put((String) parametros.get(i), evaluar(operandos.get(i)));
+                    }
+
+                    return evaluar(reemplazarParametros(cuerpo, entornoLocal));
+                }
+
+                throw new RuntimeException("Error: operador o función no encontrada -> " + operador);
+        }
+    }
