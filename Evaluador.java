@@ -59,3 +59,11 @@
                  return variables.get(operandos.get(0));
              case "EQUAL":
                  return evaluar(operandos.get(0)).equals(evaluar(operandos.get(1)));
+             case "QUOTE":
+                 return operandos;
+             case "DEFUN":
+                 if (operandos.size() < 3 || !(operandos.get(0) instanceof String) || !(operandos.get(1) instanceof List)) {
+                     throw new RuntimeException("Error en DEFUN");
+                 }
+                 funciones.put((String) operandos.get(0), operandos);
+                 return "Función " + operandos.get(0) + " definida";
