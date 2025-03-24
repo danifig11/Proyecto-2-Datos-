@@ -50,3 +50,12 @@
                  return ((Number) evaluar(operandos.get(0))).doubleValue() / divisor;
              case "SQRT":
                  return Math.sqrt(((Number) evaluar(operandos.get(0))).doubleValue());
+             case "IMPRIMIR":
+                 Object resultado = evaluar(operandos.get(0));
+                 System.out.println("IMPRIMIR: " + resultado);
+                 return null;
+             case "SETQ":
+                 variables.put((String) operandos.get(0), evaluar(operandos.get(1)));
+                 return variables.get(operandos.get(0));
+             case "EQUAL":
+                 return evaluar(operandos.get(0)).equals(evaluar(operandos.get(1)));
