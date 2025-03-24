@@ -1,27 +1,19 @@
-import java.util.*;
+/*
+ * UNIVERSIDAD DEL VALLE DE GUATEMALA
+ * Departamento de Ciencia de la Computación
+ * Autores: 
+ *  - Daniel Figueroa 24073
+ *  - Oliver Cifuentes 241021
+ *  - Saul Castillo 24915
+ * Fecha: Marzo 2025
+ * 
+ * Convertir: Clase que convierte una lista de tokens en una estructura de datos procesable.
+ */
 
-public class Convertir {
-    public static Object convertir(List<String> tokens) {
-        if (tokens.isEmpty()) {
-            throw new RuntimeException("Error dejaste la expresion vacía :(");
-        }
+ import java.util.*;
 
-        String token = tokens.remove(0);
-        if ("(".equals(token)) {
-            List<Object> lista = new ArrayList<>();
-            while (!tokens.get(0).equals(")")) {
-                lista.add(convertir(tokens));
-            }
-            tokens.remove(0);
-            return lista;
-        } else if (")".equals(token)) {
-            throw new RuntimeException("Error te faltan paréntesis :(");
-        } else {
-            try {
-                return Integer.parseInt(token);
-            } catch (NumberFormatException e) {
-                return token;
-            }
-        }
-    }
-}
+ public class Convertir {
+     public static Object convertir(List<String> tokens) {
+         if (tokens.isEmpty()) {
+             throw new RuntimeException("Error: expresión incompleta, faltan paréntesis.");
+         }
