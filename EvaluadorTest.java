@@ -90,3 +90,17 @@
          assertEquals("División por cero no permitida.", exception.getMessage());
      }
  
+     @Test
+     void testOperacionDesconocida() {
+         List<Object> expresion = Arrays.asList("OPERACION_INVALIDA", 5, 5);
+         Exception exception = assertThrows(RuntimeException.class, () -> Evaluador.evaluar(expresion));
+         assertTrue(exception.getMessage().contains("Error: operador o función no encontrada"));
+     }
+ 
+     @Test
+     void testParametrosIncorrectosEnDefun() {
+         List<Object> expresion = Arrays.asList("DEFUN", "mal", "x", Arrays.asList("+", "x", 1));
+         Exception exception = assertThrows(RuntimeException.class, () -> Evaluador.evaluar(expresion));
+         assertEquals("Error en DEFUN", exception.getMessage());
+     }
+ }
