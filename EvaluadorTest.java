@@ -40,7 +40,7 @@
          List<Object> expresion = Arrays.asList("/", 10, 2);
          assertEquals(5.0, Evaluador.evaluar(expresion));
      }
-     
+
      @Test
      void testRaizCuadrada() {
          List<Object> expresion = Arrays.asList("SQRT", 16);
@@ -59,3 +59,34 @@
          List<Object> expresion = Arrays.asList("EQUAL", 5, 5);
          assertTrue((Boolean) Evaluador.evaluar(expresion));
      }
+
+     @Test
+     void testQuote() {
+         List<Object> expresion = Arrays.asList("QUOTE", Arrays.asList(1, 2, 3));
+         assertEquals(Arrays.asList(1, 2, 3), Evaluador.evaluar(expresion));
+     }
+ 
+     @Test
+     void testDefunYUso() {
+         List<Object> defFuncion = Arrays.asList("DEFUN", "doblar", Arrays.asList("x"), Arrays.asList("*", "x", 2));
+         Evaluador.evaluar(defFuncion);
+         List<Object> llamadaFuncion = Arrays.asList("doblar", 5);
+         assertEquals(10.0, Evaluador.evaluar(llamadaFuncion));
+     }
+ 
+     @Test
+     void testCond() {
+         List<Object> expresion = Arrays.asList("COND",
+                 Arrays.asList(Arrays.asList("EQUAL", 5, 5), 100),
+                 Arrays.asList(Arrays.asList("EQUAL", 5, 6), 200)
+         );
+         assertEquals(100, Evaluador.evaluar(expresion));
+     }
+ 
+     @Test
+     void testDivisionPorCero() {
+         List<Object> expresion = Arrays.asList("/", 10, 0);
+         Exception exception = assertThrows(ArithmeticException.class, () -> Evaluador.evaluar(expresion));
+         assertEquals("División por cero no permitida.", exception.getMessage());
+     }
+ 
