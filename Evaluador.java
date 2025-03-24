@@ -67,3 +67,12 @@
                  }
                  funciones.put((String) operandos.get(0), operandos);
                  return "Función " + operandos.get(0) + " definida";
+             case "COND":
+                for (Object cond : operandos) {
+                    List<Object> condicion = (List<Object>) cond;
+                    Object resultadoCondicion = evaluar(condicion.get(0));
+                    if (resultadoCondicion instanceof Boolean && (Boolean) resultadoCondicion) {
+                        return evaluar(condicion.get(1));
+                    }
+                }
+                return null;
