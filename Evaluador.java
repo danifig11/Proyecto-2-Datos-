@@ -76,3 +76,12 @@
                     }
                 }
                 return null;
+            default:
+                if (funciones.containsKey(operador)) {
+                    List<Object> funcion = funciones.get(operador);
+                    List<Object> parametros = (List<Object>) funcion.get(1);
+                    Object cuerpo = funcion.get(2);
+
+                    if (parametros.size() != operandos.size()) {
+                        throw new RuntimeException("Error: número incorrecto de parámetros en " + operador);
+                    }
