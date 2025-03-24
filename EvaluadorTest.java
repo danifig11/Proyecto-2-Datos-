@@ -40,4 +40,22 @@
          List<Object> expresion = Arrays.asList("/", 10, 2);
          assertEquals(5.0, Evaluador.evaluar(expresion));
      }
+     
+     @Test
+     void testRaizCuadrada() {
+         List<Object> expresion = Arrays.asList("SQRT", 16);
+         assertEquals(4.0, Evaluador.evaluar(expresion));
+     }
  
+     @Test
+     void testSetq() {
+         List<Object> expresion = Arrays.asList("SETQ", "x", 42);
+         Evaluador.evaluar(expresion);
+         assertEquals(42, Evaluador.evaluar("x"));
+     }
+ 
+     @Test
+     void testEqual() {
+         List<Object> expresion = Arrays.asList("EQUAL", 5, 5);
+         assertTrue((Boolean) Evaluador.evaluar(expresion));
+     }
