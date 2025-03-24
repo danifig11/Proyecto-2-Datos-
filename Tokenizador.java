@@ -20,3 +20,20 @@
          List<String> tokens = new ArrayList<>();
          Pattern patron = Pattern.compile("\\(|\\)|'?[a-zA-Z0-9+\\-*/=<>.]+|'");
          Matcher coincidencia = patron.matcher(entrada);
+         while (coincidencia.find()) {
+            tokens.add(coincidencia.group());
+         
+        }
+        
+        List<String> tokensCorregidos = new ArrayList<>();
+        for (int i = 0; i < tokens.size(); i++) {
+            if (tokens.get(i).equals("'") && i + 1 < tokens.size()) {
+                tokensCorregidos.add("QUOTE");
+            } else {
+                tokensCorregidos.add(tokens.get(i));
+            }
+        }
+
+        return tokensCorregidos;
+    }
+}
